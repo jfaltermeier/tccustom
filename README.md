@@ -4,6 +4,8 @@ This guide is currently based on the development branch: https://github.com/ecli
 
 This guide is currently based on the `0.8.0.MS1` tags of the docker images.
 
+A generic getting started may be found here: https://github.com/eclipsesource/theia-cloud/blob/develop/doc/docs/platforms/Minikube.md
+
 ## Cutomize Theia Deployment Template
 
 If you need to cutomize more than ports, theia-image, resource-limits, etc., you may customize the kubernetes resource templates used by Theia.cloud.
