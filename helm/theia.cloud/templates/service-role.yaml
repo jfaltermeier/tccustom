@@ -1,18 +1,4 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: service-api-access
-  namespace: {{ .Release.Namespace }}
-rules:
-  -
-    apiGroups:
-      - ""
-      - theia.cloud
-    resources:
-      - sessions
-    verbs: ["get", "create", "watch", "delete"]
----
-apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: service-api-access
