@@ -32,3 +32,15 @@ Theia.cloud used the nginx-ingress controller within its default templates and w
 
 Currently the helm chart also installs some cluster-wide resources. This may cause issues when the helm chart is used to install Theia.cloud in multiple namesspaces, because the cluster-wide resources may already have been installed.
 For this guide, we have moved the cluster-wide resources under the `k8s`-directory. Those have to be applied before running `helm install`.
+
+### Adjust values.yaml
+
+You should at least adjust:
+
+* app.id
+* issuer.email
+* image.name
+* hosts.service
+* hosts.landing
+* hosts.instance
+* operator.image (our custom image from above)

@@ -18,7 +18,7 @@ issuer:
 # Docker image of the main application
 image:
   # The name of docker image to be used
-  name: theiacloud/theia-cloud-demo
+  name: theiacloud/theia-cloud-demo:0.8.0.MS1
 
   # the image pull secret. Leave empty if registry is public
   pullSecret: ""
@@ -37,10 +37,10 @@ hosts:
 # Values related to the landing page
 landingPage:
   # the landing page image to use
-  image: theiacloud/theia-cloud-landing-page
+  image: theiacloud/theia-cloud-try-now-page:0.8.0.MS1
 
   # Optional: the image pull secret
-  imagePullSecret: pullsecret
+  # imagePullSecret: pullsecret
 
   # the app id to launch
   appDefinition: "theia-cloud-demo"
@@ -51,30 +51,30 @@ keycloak:
   enable: false
 
   # Key cloak auth URL. Only has to be specified when enable: true
-  authUrl: "https://keycloak.url/auth/"
+  authUrl: ""
 
   # The Keycloak Realm. Only has to be specified when enable: true
-  realm: "TheiaCloud"
+  realm: ""
 
   # The client-id. Only has to be specified when enable: true
-  clientId: "theia-cloud"
+  clientId: ""
 
   # The oaid client secret. In case you configure your keycloak client as confindential,
   # then you may specfiy the secret here.
   # If you stick with our default public client, you may leave below value. For public clients
   # keycloak does not generate a client-secret, but in order to make oath2-proxy happy,
   # we will pass a value
-  clientSecret: "publicbutoauth2proxywantsasecret"
+  clientSecret: ""
 
   # The cookie secret. This should not be public! Only has to be specified when enable: true
   # See https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/#generating-a-cookie-secret
   # for how to generate a strong cookie secret.
-  cookieSecret: "OQINaROshtE9TcZkNAm5Zs2Pv3xaWytBmc5W7sPX7ws="
+  cookieSecret: ""
 
 # Values related to the operator
 operator:
   # The operator image
-  image: theiacloud/theia-cloud-operator
+  image: theiacloud/theia-cloud-operator:template
 
   # Optional: the image pull secret
   imagePullSecret: pullsecret
@@ -105,7 +105,7 @@ operator:
 # Values of the Theia.cloud REST service
 service:
   # The image to use
-  image: theiacloud/theia-cloud-service
+  image: theiacloud/theia-cloud-service:0.8.0.MS1
 
   # Optional: the image pull secret
   imagePullSecret: pullsecret
@@ -119,7 +119,8 @@ ingress:
   instanceName: "theia-cloud-demo-ws-ingress"
 
   # The cluster issuer to use
-  clusterIssuer: letsencrypt-prod
+  # clusterIssuer: letsencrypt-prod
+  clusterIssuer: theia-cloud-selfsigned-issuer
 
   # When set to true the cert-manager.io/common-name annotation will be set.
   # This is only required when the issued certificate by the cert-manager misses a
