@@ -45,6 +45,53 @@ You should at least adjust:
 * hosts.instance
 * operator.image (our custom image from above)
 
+If you don't want to deal with hostnames yet, you may use nip.io with the ip of your nginx-ingress-controller installation. You may get the ip similar to this:
+
+```bash
+kubectl get services ingress-nginx-controller -n ingress-nginx
+```
+
 ### Adjust helm/theia.cloud/templates/theia-appdefinition-spec.yaml
 
 This is the definition of our app to deploy. Most of the values that are part of the spec will be filled into `templateDeployment.yaml` and `templateDeploymentWithoutOAuthProxy.yaml` we've adjusted above.
+
+### Install
+
+Please note that when using the celf-signes issuer you have to visit all hostnames first and acceppt the self-signed certificates in your browser.
+
+```bash
+##############
+# Only initial
+##############
+
+# Install cert-manager
+
+# kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml
+
+
+# Install nginx-ingress-controller
+
+# helm upgrade --install ingress-nginx ingress-nginx \
+#  --repo https://kubernetes.github.io/ingress-nginx \
+#  --namespace ingress-nginx --create-namespace
+
+
+# Install Theia.cloud cluster wide resources
+
+kubectl apply -f k8s/clusterissuer-production.yaml
+kubectl apply -f k8s/clusterissuer-selfsigned.yaml
+kubectl apply -f k8s/operator-role.yaml
+kubectl apply -f k8s/service-role.yaml
+
+
+########################################
+# Install new Theia.cloud in a namespace
+########################################
+
+helm install theia-cloud ./helm/theia.cloud --namespace theiacloud --create-namespace
+
+# Minikube hostnames
+
+# helm install theia-cloud ./helm/theia.cloud --namespace theiacloud --create-namespace --set hosts.service=service.$(minikube ip).nip.io --set hosts.landing=theia.cloud.$(minikube ip).nip.io --set hosts.instance=ws.$(minikube ip).nip.io
+
+```

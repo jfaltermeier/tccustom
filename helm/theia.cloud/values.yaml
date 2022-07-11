@@ -125,4 +125,5 @@ ingress:
   # When set to true the cert-manager.io/common-name annotation will be set.
   # This is only required when the issued certificate by the cert-manager misses a
   # common-name
-  theiaCloudCommonName: false
+  # theiaCloudCommonName: false
+  theiaCloudCommonName: true
