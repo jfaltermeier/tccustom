@@ -15,7 +15,7 @@ Usually both `templateDeployment.yaml` and `templateDeploymentWithoutOAuthProxy.
 Currently this customization was build like this (available as `theiacloud/theia-cloud-operator:template`):
 
 ```bash
-docker build -t theia-cloud-operator:template -f dockerfiles/operator/Dockerfile .
+docker build -t theia-cloud-operator:template -f custom-operator/Dockerfile .
 docker tag theia-cloud-operator:template theiacloud/theia-cloud-operator:template
 docker push theiacloud/theia-cloud-operator:template
 ```

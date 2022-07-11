@@ -19,13 +19,6 @@ spec:
         app: placeholder-app
     spec:
       automountServiceAccountToken: false
-      # initContainers:
-      # - name: wondershaper-init
-      #   image: gcr.io/kubernetes-238012/theia-cloud-wondershaper
-      #   securityContext:
-      #     capabilities:
-      #       add:
-      #       - NET_ADMIN
       containers:
         - name: placeholder-definitionname
           image: placeholder-image
@@ -38,3 +31,11 @@ spec:
             requests:
               cpu: placeholder-cpu-requests
               memory: placeholder-memory-requests
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+        - name: nginx-hello-world
+          image: nginxdemos/hello
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0

@@ -50,6 +50,14 @@ spec:
             requests:
               cpu: placeholder-cpu-requests
               memory: placeholder-memory-requests
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+        - name: nginx-hello-world
+          image: nginxdemos/hello
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
       securityContext:
         runAsUser: placeholder-uid
         runAsGroup: placeholder-uid
