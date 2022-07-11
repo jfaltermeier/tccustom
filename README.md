@@ -19,3 +19,16 @@ docker build -t theia-cloud-operator:template -f custom-operator/Dockerfile .
 docker tag theia-cloud-operator:template theiacloud/theia-cloud-operator:template
 docker push theiacloud/theia-cloud-operator:template
 ```
+
+## Helm
+
+### Prerequisites for K8s-Cluster
+
+Please install cert-manager: https://cert-manager.io/docs/installation/
+
+Theia.cloud used the nginx-ingress controller within its default templates and within the helm-chart templates. Please install nginx ingress controller: https://kubernetes.github.io/ingress-nginx/deploy/
+
+### Multiple Helm Chart installations
+
+Currently the helm chart also installs some cluster-wide resources. This may cause issues when the helm chart is used to install Theia.cloud in multiple namesspaces, because the cluster-wide resources may already have been installed.
+For this guide, we have moved the cluster-wide resources under the `k8s`-directory. Those have to be applied before running `helm install`.

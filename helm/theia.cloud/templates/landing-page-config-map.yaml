@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: landing-page-config
+  namespace: {{ .Release.Namespace }}
+data:
+  config.js: |
+    window.theiaCloudConfig = {
+      appId: "{{ .Values.app.id }}",
+      appName: "{{ .Values.app.name }}",
+      useKeycloak: {{ .Values.keycloak.enable }},
+      keycloakAuthUrl: "{{ .Values.keycloak.authUrl }}",
+      keycloakRealm: "{{ .Values.keycloak.realm }}",
+      keycloakClientId: "{{ .Values.keycloak.clientId }}",
+      serviceUrl: "https://{{ .Values.hosts.service }}/service",
+      appDefinition: "{{ .Values.landingPage.appDefinition }}",
+    };
+binaryData:
+  {{ range $path, $bytes := .Files.Glob (printf "logos/%s" .Values.app.logo)}}
+  {{ print "logo.png: "}}{{ $.Files.Get $path | b64enc }}
+  {{ end }}
+
