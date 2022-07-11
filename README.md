@@ -44,3 +44,7 @@ You should at least adjust:
 * hosts.landing
 * hosts.instance
 * operator.image (our custom image from above)
+
+### Adjust helm/theia.cloud/templates/theia-appdefinition-spec.yaml
+
+This is the definition of our app to deploy. Most of the values that are part of the spec will be filled into `templateDeployment.yaml` and `templateDeploymentWithoutOAuthProxy.yaml` we've adjusted above.
